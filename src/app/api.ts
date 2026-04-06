@@ -11,5 +11,11 @@ export class Api {
   addProduct(data: any) {     //product data we send
     return this.http.post('https://fakestoreapi.com/products', data);
     //sends data to the server and returns an observable of the response
-}
+  }
+  updateProduct(id: number, data: any) {
+    return this.http.put(`https://fakestoreapi.com/products/${id}`, data);
+  }
+  deleteProduct(id:number){
+    return this.http.delete(`https://fakestoreapi.com/products/${id}`)
+  }
 }

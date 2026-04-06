@@ -24,11 +24,26 @@ export class ApiPracticeComponent implements OnInit {
   newProduct = {
   title: '',
   price: ''
-};
+  };
 
-addProduct() {    //runs when button clicked (function trigger)
-  this.api.addProduct(this.newProduct).subscribe((res) => { //send user data to service
-    console.log("POST RESPONSE:", res);
-  });
-}
+  addProduct() {    //runs when button clicked (function trigger)
+    this.api.addProduct(this.newProduct).subscribe((res) => { //send user data to service
+      console.log("POST RESPONSE:", res);
+    });
+  }
+  updateData = {
+  title: '',
+  price: ''
+  };
+
+  updateProduct() {
+    this.api.updateProduct(1, this.updateData).subscribe((res: any) => {
+      console.log("PUT RESPONSE:", res);
+    });
+  }
+  deleteProduct(){
+    this.api.deleteProduct(5).subscribe((res:any)=>{
+      console.log("DELETE RESPONSE:",res);
+    });
+  }
 }

@@ -9,3 +9,13 @@
 <input type="number" placeholder="Price" [(ngModel)]="newProduct.price">
 
 <button (click)="addProduct()">Add Product</button>
+
+<h2>Update Product</h2>
+
+<input type="text" [(ngModel)]="updateData.title" placeholder="New Title">
+
+<input type="number" [(ngModel)]="updateData.price" placeholder="New Price">
+
+<button (click)="updateProduct()">Update Product</button>
+
+<button (click)="deleteProduct()">Delete Product</button>
