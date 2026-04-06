@@ -1,29 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import {  Api} from '../api';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-api-practice',
   standalone: true,
-  imports: [CommonModule,HttpClientModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './api-practice.html',
   styleUrls: ['./api-practice.css']
 })
 export class ApiPracticeComponent implements OnInit {
 
-  users: any[] = [];
+  users: any[] = [];    //stores api response in array
 
-  constructor(private http: HttpClient) {}
+  constructor(private api: Api) {} //injects service to call api
 
-  ngOnInit() {
-    this.getUsers();
+  ngOnInit() {          //runs automatically when component is initialized
+    this.api.getUsers().subscribe((res:any) => {  //calls servive method->service method calls api->response comes back->subscribe receives data
+      console.log(res);
+      this.users = res;
+    });
   }
+  newProduct = {
+  title: '',
+  price: ''
+};
 
-  getUsers() {
-    this.http.get<any[]>('https://fakestoreapi.com/products')
-      .subscribe((res) => {
-        console.log("API DATA:", res); 
-        this.users = res;               
-      });
-  }
+addProduct() {    //runs when button clicked (function trigger)
+  this.api.addProduct(this.newProduct).subscribe((res) => { //send user data to service
+    console.log("POST RESPONSE:", res);
+  });
+}
 }
